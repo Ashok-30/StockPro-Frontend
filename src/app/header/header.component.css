@@ -1,0 +1,14 @@
+.active{
+    border-bottom: 2px solid rgb(251, 247, 247);
+    transform: scale(1.2);
+    transition: border-bottom 0.2s ease-in-out,color 0.2s ease,transform 0.2s ease;
+}
+
+  .header-fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 75px; 
+  }
+  

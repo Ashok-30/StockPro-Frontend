@@ -1,0 +1,10 @@
+.footer-fixed {
+    background: linear-gradient(to right, #F97316, #EF4444, #DC2626); /* Using Tailwind CSS color codes */
+    color: #E5E7EB; /* text-gray-200 equivalent */
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .footer-logo {
+    width: 80px; /* Adjust as necessary */
+    height: 80px; /* Adjust as necessary */
+  }
