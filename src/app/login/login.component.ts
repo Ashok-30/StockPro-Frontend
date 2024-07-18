@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
-import { FooterComponent } from '../footer/footer.component';
-import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, CommonModule, FormsModule],
+  imports: [HeaderComponent,FooterComponent,CommonModule,FormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -46,9 +46,16 @@ export class LoginComponent {
       this.authService.verifyOtp(this.credentials.email, this.otp).subscribe({
         next: (response) => {
           this.message = response;
-          setTimeout(() => {
-            this.router.navigate(['/dashboard']); 
-          }, 2000); 
+          // Store the token after OTP verification
+          this.authService.login(this.credentials).subscribe({
+            next: (token) => {
+              this.authService.storeToken(token);
+              this.router.navigate(['/dashboard']);
+            },
+            error: (error) => {
+              this.message = error.error;
+            }
+          });
         },
         error: (error) => {
           this.message = error.error;

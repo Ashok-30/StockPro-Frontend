@@ -1,1 +1,28 @@
-<p>dashboard works!</p>
+<div class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+    <h1 class="text-3xl font-semibold text-gray-800 mb-6">Welcome to the Dashboard</h1>
+    
+    <div class="mb-4">
+      <label class="block text-gray-600 font-bold mb-2">Name:</label>
+      <div class="p-2 border rounded bg-gray-100">{{ userDetails.name }}</div>
+    </div>
+  
+    <div class="mb-4">
+      <label class="block text-gray-600 font-bold mb-2">Contact Number:</label>
+      <div class="p-2 border rounded bg-gray-100">{{ userDetails.contactNumber }}</div>
+    </div>
+  
+    <div class="mb-4">
+      <label class="block text-gray-600 font-bold mb-2">Email:</label>
+      <div class="p-2 border rounded bg-gray-100">{{ userDetails.email }}</div>
+    </div>
+  
+    <button 
+      (click)="logout()" 
+      class="mt-4 px-4 py-2 bg-orange-600 text-white font-semibold rounded-lg hover:bg-blue-700"
+    >
+      Logout
+    </button>
+  
+    <p *ngIf="message" class="mt-4 text-red-600">{{ message }}</p>
+  </div>
+  
