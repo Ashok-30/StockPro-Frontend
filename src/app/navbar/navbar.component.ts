@@ -1,17 +1,17 @@
-
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  templateUrl: './navbar.component.html',
+  imports: [RouterLink,RouterLinkActive],
+  styleUrls: ['./navbar.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class NavbarComponent implements OnInit {
+
   userDetails: any = {};
   message: string = '';
 
@@ -20,7 +20,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.fetchUserDetails();
   }
-
   fetchUserDetails(): void {
     this.authService.getDashboard().subscribe({
       next: (response) => {
@@ -33,16 +32,4 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  logout(): void {
-    this.authService.logout().subscribe({
-      next: (response) => {
-        this.authService.clearToken();
-        this.router.navigate(['/login']);
-      },
-      error: (error) => {
-        this.message = 'Error logging out';
-        console.error('Error logging out', error);
-      }
-    });
-  }
 }

@@ -66,4 +66,13 @@ export class AuthService {
     });
     return this.http.post(`${this.apiUrl}/logout`, {}, { headers, responseType: 'text' });
   }
+  addUser(user: any): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post(`${this.apiUrl}/add-user`, user, { headers, responseType: 'text' });
+  }
+  
 }

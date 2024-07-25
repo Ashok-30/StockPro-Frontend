@@ -18,7 +18,9 @@ export class SignupComponent {
     name: '',
     contactNumber: '',
     email: '',
-    password: ''
+    password: '',
+    storeName: '',
+    storeAddress: ''
   };
   message: string = '';
 
@@ -49,7 +51,9 @@ export class SignupComponent {
       name: '',
       contactNumber: '',
       email: '',
-      password: ''
+      password: '',
+      storeName: '',
+      storeAddress: ''
     };
   }
 }

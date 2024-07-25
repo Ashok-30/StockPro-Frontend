@@ -1,19 +1,19 @@
-
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.css'],
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  imports: [CommonModule, RouterLink, RouterLinkActive]
 })
-export class DashboardComponent implements OnInit {
-  userDetails: any = {};
+export class SidebarComponent implements OnInit {
   message: string = '';
+  userDetails: any = {};
+  isDropdownOpen = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
     this.authService.getDashboard().subscribe({
       next: (response) => {
         this.userDetails = response;
+        console.log('User details:', this.userDetails); // Log the user details for debugging
       },
       error: (error) => {
         this.message = 'Error fetching dashboard details';
@@ -32,6 +33,8 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
+  collapseClass: string = '';
 
   logout(): void {
     this.authService.logout().subscribe({
@@ -44,5 +47,9 @@ export class DashboardComponent implements OnInit {
         console.error('Error logging out', error);
       }
     });
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 }
