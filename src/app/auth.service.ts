@@ -66,6 +66,7 @@ export class AuthService {
     });
     return this.http.post(`${this.apiUrl}/logout`, {}, { headers, responseType: 'text' });
   }
+
   addUser(user: any): Observable<any> {
     const token = this.getToken();
     const headers = new HttpHeaders({
@@ -73,6 +74,31 @@ export class AuthService {
       'Authorization': `Bearer ${token}`
     });
     return this.http.post(`${this.apiUrl}/add-user`, user, { headers, responseType: 'text' });
+  }
+  getUsersByStore(): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any[]>(`${this.apiUrl}/users/by-store`, { headers });
+  }
+ 
+  updateUser(userId: number, userDetails: any): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put(`${this.apiUrl}/users/${userId}`, userDetails, { headers });
+  }
+  deleteUser(userId: number): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete(`${this.apiUrl}/users/${userId}`, { headers, responseType: 'text' });
   }
   
 }

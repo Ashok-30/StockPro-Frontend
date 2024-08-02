@@ -12,10 +12,7 @@
       <span class="ml-3 text-black text-xl">StockPro</span>
     </a>
       <!-- Collapse header -->
-      <div
-        [ngClass]="collapseClass"
-        class="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200"
-      >
+      
         <div class="flex flex-wrap">
           <div class="w-6/12">
             <a
@@ -25,7 +22,7 @@
               StockPro
             </a>
           </div>
-        </div>
+        
       </div>
      
       <!-- Navigation -->
@@ -54,31 +51,36 @@
           ></i>
           </div>
           
-          <ul
-            *ngIf="isDropdownOpen"
-            class="ml-6 mt-2 space-y-2 transition-all duration-300 ease-in-out"
-          >
-            <li class="items-center" [ngClass]="{'disabled': userDetails.role !== 'ADMIN'}">
-              <a
-                class="text-xs uppercase py-3 font-bold block"
-                routerLink="/add-user"
-                routerLinkActive="text-white"
-                [class.disabled]="userDetails.role !== 'ADMIN'"
-              >
-                Add User
-              </a>
-            </li>
-            <li>
-              <a
-                class="text-xs uppercase py-3 font-bold block"
-                routerLink="/users/manage"
-                routerLinkActive="text-white"
-                [class.disabled]="userDetails.role !== 'ADMIN'"
-              >
-                Manage Users
-              </a>
-            </li>
-          </ul>
+          <div>
+            <!-- Sidebar content -->
+            <ul
+              *ngIf="isDropdownOpen"
+              class="ml-6 mt-2 space-y-2 transition-all duration-300 ease-in-out"
+            >
+              <li class="items-center" [ngClass]="{'disabled': userDetails.role !== 'ADMIN'}">
+                <a
+                  class="text-xs uppercase py-3 font-bold block"
+                  routerLink="/add-user"
+                  routerLinkActive="text-white"
+                  [class.disabled]="userDetails.role !== 'ADMIN'"
+                >
+                  Add User
+                </a>
+              </li>
+              <li class="items-center" [ngClass]="{'disabled': userDetails.role !== 'ADMIN'}">
+                <a
+                  class="text-xs uppercase py-3 font-bold block"
+                  routerLink="/manage-users"
+                  routerLinkActive="text-white"
+                  [class.disabled]="userDetails.role !== 'ADMIN'"
+                >
+                  Manage Users
+                </a>
+              </li>
+            </ul>
+           
+          </div>
+          
         </li>
         <li class="items-center">
           <a

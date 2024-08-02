@@ -31,9 +31,9 @@ export class AddUserComponent {
       this.authService.addUser(this.user).subscribe(
         response => {
           console.log(response);
-          this.message = response; // Set the message from the backend response
+          this.message = response; 
           if (response === 'User added successfully') {
-            this.router.navigate(['/users/manage']); // Navigate to user management page
+            this.router.navigate(['/manage-users']); 
           }
         },
         error => {

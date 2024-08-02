@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -19,6 +19,12 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchUserDetails();
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.checkCurrentRoute();
+      }
+    });
+    this.checkCurrentRoute(); // Initial check
   }
 
   fetchUserDetails(): void {
@@ -33,8 +39,6 @@ export class SidebarComponent implements OnInit {
       }
     });
   }
-
-  collapseClass: string = '';
 
   logout(): void {
     this.authService.logout().subscribe({
@@ -51,5 +55,10 @@ export class SidebarComponent implements OnInit {
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  checkCurrentRoute() {
+    const currentRoute = this.router.url;
+    this.isDropdownOpen = currentRoute === '/add-user' || currentRoute === '/manage-users';
   }
 }

@@ -1,0 +1,13 @@
+<div class="modal-overlay">
+    <div class="modal-content">
+      <h3>{{ message }}</h3>
+      <div *ngIf="showConfirmButtons" class="flex justify-between mt-4">
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" (click)="confirm()">Yes</button>
+        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" (click)="cancel()">No</button>
+      </div>
+      <div *ngIf="!showConfirmButtons" class="flex justify-center mt-4">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="ok()">OK</button>
+      </div>
+    </div>
+  </div>
+  
