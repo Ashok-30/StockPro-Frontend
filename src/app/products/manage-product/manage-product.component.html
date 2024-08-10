@@ -26,7 +26,8 @@
               <option value="50">50</option>
             </select>
           </span>
-          <input type="text" class="px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search">
+          <input type="text" [(ngModel)]="searchValue" (input)="searchProducts()" class="px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search">
+
         </div>
         
       

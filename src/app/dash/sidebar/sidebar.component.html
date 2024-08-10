@@ -98,22 +98,22 @@
               *ngIf="isProductDropdownOpen"
               class="ml-6 mt-2 space-y-2 transition-all duration-300 ease-in-out"
             >
-              <li class="items-center" [ngClass]="{'disabled': userDetails.role !== 'ADMIN'}">
+              <li class="items-center" [ngClass]="{'disabled': userDetails.role !== 'ADMIN' && userDetails.role !== 'MANAGER'}">
                 <a
                   class="text-xs uppercase py-3 font-bold block"
                   routerLink="/add-product"
                   routerLinkActive="text-white"
-                  [class.disabled]="userDetails.role !== 'ADMIN'"
+                  [class.disabled]="userDetails.role !== 'ADMIN' && userDetails.role !== 'MANAGER'"
                 >
                   Add Product
                 </a>
               </li>
-              <li class="items-center" [ngClass]="{'disabled': userDetails.role !== 'ADMIN'}">
+              <li class="items-center" [ngClass]="{'disabled': userDetails.role !== 'ADMIN' && userDetails.role !== 'MANAGER'}">
                 <a
                   class="text-xs uppercase py-3 font-bold block"
                   routerLink="/manage-product"
                   routerLinkActive="text-white"
-                  [class.disabled]="userDetails.role !== 'ADMIN'"
+                  [class.disabled]="userDetails.role !== 'ADMIN' && userDetails.role !== 'MANAGER'"
                 >
                   Manage Product
                 </a>
@@ -131,14 +131,14 @@
             Sales
             <i
             class="fas fa-caret-down ml-2 cursor-pointer"
-            (click)="toggleDropdown()"
+            (click)="toggleDropdownSales()"
           ></i>
           </div>
           
           <div>
             <!-- Sidebar content -->
             <ul
-              *ngIf="isUserDropdownOpen"
+              *ngIf="isSalesDropdownOpen"
               class="ml-6 mt-2 space-y-2 transition-all duration-300 ease-in-out"
             >
               <li class="items-center">
@@ -148,7 +148,7 @@
                   routerLinkActive="text-white"
                   
                 >
-                  Orders
+                  Sale Point
                 </a>
               </li>
               <li class="items-center">

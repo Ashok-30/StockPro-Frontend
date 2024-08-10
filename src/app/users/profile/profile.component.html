@@ -1,0 +1,70 @@
+<app-sidebar></app-sidebar>
+<div class="relative md:ml-64 bg-blueGray-100">
+ 
+    <div class="relative bg-white-200 md:pt-32 pb-500 pt-12">
+    
+  <div class="container px-5  mx-auto flex flex-wrap items-center">
+   
+    <div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0"style="margin-right: auto">
+        <div *ngIf="message" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 animate-fade-out">{{ message }}</div>
+      <h2 class="text-gray-900 text-lg font-medium title-font mb-5">View Profile</h2>
+
+     
+        <div class="relative mb-4">
+          <label for="name" class="text-gray-900 text-lg font-small title-font mb-5">Name</label>
+          <input type="text" [(ngModel)]="user.name"  id="name" name="name" required minlength="3" 
+          class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 
+          text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+
+        
+        </div>
+        <div class="relative mb-4">
+          <label for="contactNumber" class="text-gray-900 text-lg font-small title-font mb-5">Contact Number</label>
+          <input type="text" [(ngModel)]="user.contactNumber"  id="name" name="name" required minlength="3" 
+          class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 
+          text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+        </div>
+        <div class="relative mb-4">
+          <label for="email" class="text-gray-900 text-lg font-small title-font mb-5">Email</label>
+          <input type="text" [(ngModel)]="user.email"  id="name" name="name" required minlength="3" 
+          class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 
+          text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+        </div>
+        
+        <div class="relative mb-4">
+          <label for="role" class="text-gray-900 text-lg font-small title-font mb-5">Role</label>
+         
+          <input type="text" [(ngModel)]="user.role" id="name" name="name" required minlength="3" 
+          class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 
+          text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+        </div>
+<!-- profile.component.html -->
+<button type="button"
+        [disabled]="user.role !== 'ADMIN'"
+        [ngStyle]="{'background-color': user.role !== 'ADMIN' ? '#ccc' : '#f87171'}"
+        class="text-white border-0 py-2 px-6 focus:outline-none rounded text-lg"
+        (click)="updateUser()">
+  {{ user.role !== 'ADMIN' ? 'No Permission To Edit' : 'Update' }}
+</button>
+
+
+      
+   
+  </div>
+  <div class="custom-lg-w-40 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
+    <div class="text-center">
+      <h1 class="text-2xl font-medium title-font mb-4 text-gray-400 tracking-widest">
+        Welcome to Profile
+      </h1>
+      <img src="assets/images/add-user.jpg" alt="Sign Up Image" class="object-cover object-center rounded-lg w-full h-full">
+    </div>
+    
+  </div>
+
+</div>
+<div class="text-xs text-gray-500 mt-4 text-center">
+  Copyright © 2024-2024. All rights reserved. Version 1.0.0
+</div>
+</div>
+
+

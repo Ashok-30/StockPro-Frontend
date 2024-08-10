@@ -17,16 +17,22 @@ export interface BasketItem {
 export class BasketService {
   private basketSubject = new BehaviorSubject<BasketItem[]>([]);
   basket$ = this.basketSubject.asObservable();
-
+  basketItems: BasketItem[] = [];
   constructor() { }
 
   addToBasket(item: BasketItem): void {
+    // Create a new array with the new item added, ensuring immutability
     const currentItems = this.basketSubject.value;
-    currentItems.push(item);
-    this.basketSubject.next(currentItems);
+    this.basketSubject.next([...currentItems, item]);
+  }
+
+  clearBasket(): void {
+    // Clear all items by setting a new empty array
+    this.basketSubject.next([]);
   }
 
   getBasket(): BasketItem[] {
+    // Return the current snapshot of the basket items
     return this.basketSubject.value;
   }
 }

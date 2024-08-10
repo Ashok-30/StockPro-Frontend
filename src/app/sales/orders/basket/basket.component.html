@@ -1,4 +1,4 @@
-<!-- Assuming this is basket.component.html -->
+
 <app-sidebar></app-sidebar>
 <div class="relative md:ml-64 bg-blueGray-100">
   <div class="relative bg-white-200 md:pt-32 pb-500 pt-12">
@@ -74,7 +74,7 @@
           <!-- Place Order and Back Buttons -->
           <div class="flex items-center justify-start">
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
-                    type="button" (click)="placeOrder()" [disabled]="!customerName || !customerPhone">
+                    type="button" (click)="placeOrder()" [disabled]="!customerName || !customerPhone || basketItems.length <= 0">
               Place Order
             </button>
             <button routerLink="/orders" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">

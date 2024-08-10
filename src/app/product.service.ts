@@ -65,5 +65,9 @@ sellProducts(saleRequests: any[]): Observable<string> {
 addOrder(orderData: Order): Observable<Order> {
   return this.http.post<Order>(`${this.apiUrl1}/orders`, orderData, { headers: this.getHeaders() });
 }
+searchProducts(name: string): Observable<any> {
+  const headers = this.getHeaders();
+  return this.http.get(`${this.apiUrl}/search`, { headers: headers, params: new HttpParams().set('name', name) });
+}
   
 }

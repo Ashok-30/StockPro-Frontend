@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { interval, Subscription, switchMap, catchError, of } from 'rxjs';
+import { NavigationStart, Router, RouterModule } from '@angular/router';
+import { interval, Subscription, switchMap, catchError, of, filter } from 'rxjs';
 import { BasketItem, BasketService } from '../../../basket.service';
 import { ProductService } from '../../../product.service';
 import { SidebarComponent } from '../../../dash/sidebar/sidebar.component';
@@ -24,7 +24,11 @@ export class BasketComponent implements OnInit, OnDestroy {
   customerPhone: string = '';
   private timeSubscription!: Subscription;
 
-  constructor(private basketService: BasketService, private productService: ProductService, private router: Router) {}
+
+
+  constructor(private basketService: BasketService, private productService: ProductService, private router: Router) {
+  
+  }
 
   ngOnInit() {
     this.updateDateTime();
@@ -35,6 +39,8 @@ export class BasketComponent implements OnInit, OnDestroy {
       this.basketItems = items;
       this.updateGrossAmount();
     });
+    
+   
   }
 
   ngOnDestroy() {
@@ -104,9 +110,10 @@ export class BasketComponent implements OnInit, OnDestroy {
         console.log('Transaction completed successfully');
         this.message = 'Transaction completed successfully!';
         this.resetBasket();
-        this.reloadPage(); 
-        this.updateGrossAmount();
-       ``
+        setTimeout(() => {
+          this.router.navigate(['/orders']);
+        }, 2000);
+       
       },
       error: error => console.error('Final error handling:', error)
     });
@@ -118,7 +125,5 @@ export class BasketComponent implements OnInit, OnDestroy {
     this.customerName = '';
     this.customerPhone = '';
 }
-reloadPage() {
-  window.location.reload();
-}
+
 }

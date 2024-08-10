@@ -100,5 +100,13 @@ export class AuthService {
     });
     return this.http.delete(`${this.apiUrl}/users/${userId}`, { headers, responseType: 'text' });
   }
+  getUserProfile(): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any>(`${this.apiUrl}/users/profile`, { headers });
+  }
   
 }

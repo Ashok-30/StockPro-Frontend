@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../product.service';
@@ -25,7 +25,9 @@ export class OrdersComponent implements OnInit {
   selectedProduct: any = [];
   productToDelete: any = null;
   message: string | null = null;
-  viewBasketEnabled: boolean = false; 
+  viewBasketEnabled: boolean = false;
+  basketItems: BasketItem[] = []; 
+  searchValue: string = '';
   constructor(private productService: ProductService,
     private basketService: BasketService, 
     private router : Router
@@ -33,7 +35,13 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchProducts();
+    this.basketService.basket$.subscribe(items => {
+      this.basketItems = items; // This will update whenever the basket changes
+    });
+
+    this.clearBasket();
   }
+
 
   fetchProducts(): void {
     this.productService.getAllProducts(this.currentPage - 1, this.pageSize).subscribe({
@@ -73,7 +81,10 @@ export class OrdersComponent implements OnInit {
   }
   viewBasket(): void {
     this.router.navigate(['/basket']);
+    
   }
+ 
+ 
   
   addToBasket(product: any, quantity: number): void {
     if (!quantity || quantity > product.quantity) {
@@ -94,10 +105,27 @@ export class OrdersComponent implements OnInit {
     this.basketService.addToBasket(item);
    
     console.log('Item added to basket:', item);
-  
-
 }
 
-
+clearBasket(): void {
+  console.log('Clearing basket');
+  this.basketService.clearBasket();
+}
+searchProducts(): void {
+  if (this.searchValue) {
+    this.productService.searchProducts(this.searchValue).subscribe({
+      next: (data) => {
+        this.products = data;
+        this.totalProducts = this.products.length;
+        this.setPage(1); // Reset to first page of search results
+      },
+      error: (error) => {
+        console.error('Error searching products:', error);
+      }
+    });
+  } else {
+    this.fetchProducts(); // fetch all products if search is cleared
+  }
+}
 }
 

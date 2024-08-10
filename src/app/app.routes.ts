@@ -10,6 +10,7 @@ import { AddProductComponent } from './products/add-product/add-product.componen
 import { ManageProductComponent } from './products/manage-product/manage-product.component';
 import { OrdersComponent } from './sales/orders/orders.component';
 import { BasketComponent } from './sales/orders/basket/basket.component';
+import { ProfileComponent } from './users/profile/profile.component';
 
 
 
@@ -25,6 +26,7 @@ export const routes: Routes = [
   { path: 'orders', title: 'Orders', component: OrdersComponent, canActivate: [AuthGuard] },
   { path: 'basket', title: 'Basket', component: BasketComponent, canActivate: [AuthGuard] },
 
+  { path: 'profile', title: 'Profile', component: ProfileComponent, canActivate: [AuthGuard] },
 
  
 ];
