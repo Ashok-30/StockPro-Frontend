@@ -1,0 +1,42 @@
+<app-header></app-header>
+<section class="text-gray-600 body-font" style="margin-top: -1rem; margin-bottom: 0rem; padding-top:86px;">
+  <div class="container px-5 py-24 mx-auto flex flex-wrap items-center" style="padding-bottom: 0.5rem;">
+    <div class="custom-lg-w-40 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
+      <img src="assets/images/login.svg" alt="Login Image" class="object-cover object-center rounded-lg w-full h-full">
+    </div>
+    <div class="lg:w-2/6 md:w-1/2 bg-[#f5f5f5] rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
+      <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Login</h2>
+      <p class="leading-relaxed mb-5">Log in to unlock streamlined inventory management at your fingertips!</p>
+      <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" class="space-y-4" novalidate>
+        <div *ngIf="!otpSent">
+          <div class="relative mb-4">
+            <label for="email" class="text-gray-900 text-lg font-small title-font mb-5">Email</label>
+            <input type="email" id="email" name="email" [(ngModel)]="credentials.email" #email="ngModel" required email class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            <div *ngIf="loginForm.submitted && email.invalid" class="text-red-500 text-sm">
+              <small *ngIf="email.errors?.['required']">Email is required.</small>
+              <small *ngIf="email.errors?.['email']">Invalid email format.</small>
+            </div>
+          </div>
+          <div class="relative mb-4">
+            <label for="password" class="text-gray-900 text-lg font-small title-font mb-5">Password</label>
+            <input type="password" id="password" name="password" [(ngModel)]="credentials.password" #password="ngModel" required minlength="6" class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            <div *ngIf="loginForm.submitted && password.invalid" class="text-red-500 text-sm">
+              <small *ngIf="password.errors?.['required']">Password is required.</small>
+              <small *ngIf="password.errors?.['minlength']">Password must be at least 6 characters long.</small>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="otpSent" class="relative mb-4">
+          <label for="otp" class="text-gray-900 text-lg font-small title-font mb-5">OTP</label>
+          <input type="text" id="otp" name="otp" [(ngModel)]="otp" #otpInput="ngModel" required class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          <div *ngIf="loginForm.submitted && otpInput.invalid" class="text-red-500 text-sm">
+            <small *ngIf="otpInput.errors?.['required']">OTP is required.</small>
+          </div>
+        </div>
+        <button type="submit" class="text-white bg-[#1ebcff] border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg">{{ otpSent ? 'Verify OTP' : 'Login' }}</button>
+      </form>
+      <div *ngIf="message" class="text-xs text-gray-400 text-opacity-90 mt-3">{{ message }}</div>
+    </div>
+  </div>
+</section>
+

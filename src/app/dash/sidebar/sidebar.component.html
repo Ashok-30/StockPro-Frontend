@@ -1,0 +1,230 @@
+<nav
+  class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl 
+  bg-gradient-to-r from-[#1E90FF] via-[#1ebcff] to-[#1ebcff] flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6"
+>
+  <div
+    class="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto"
+  >
+   
+    <!-- Brand -->
+    <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0" routerLink="/">
+      <img src="assets/images/SP_logo.png" alt="StockPro Logo" class="w-20 h-20 text-white p-2">
+      <span class="ml-3 text-white text-xl">StockPro</span>
+    </a>
+    
+     
+      <!-- Navigation -->
+      <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+      
+        <li class="items-center">
+          <a
+            class="text-xs uppercase py-3 font-bold block"
+            routerLink="/dashboard"
+            routerLinkActive="text-white"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
+            Dashboard
+          </a>
+        </li>
+        <li class="items-center">
+          <div
+            class="text-xs uppercase py-3 font-bold block"
+          >
+            <i class="fas fa-users text-blueGray-400 mr-2 text-sm"></i>
+            Users
+            <i
+            class="fas fa-caret-down ml-2 cursor-pointer"
+            (click)="toggleDropdown()"
+          ></i>
+          </div>
+          
+          <div>
+            <!-- Sidebar content -->
+            <ul
+              *ngIf="isUserDropdownOpen"
+              class="ml-6 mt-2 space-y-2 transition-all duration-300 ease-in-out"
+            >
+              <li class="items-center" [ngClass]="{'disabled': userDetails.role !== 'ADMIN'}">
+                <a
+                  class="text-xs uppercase py-3 font-bold block"
+                  routerLink="/add-user"
+                  routerLinkActive="text-white"
+                  [class.disabled]="userDetails.role !== 'ADMIN'"
+                >
+                  Add User
+                </a>
+              </li>
+              <li class="items-center" [ngClass]="{'disabled': userDetails.role !== 'ADMIN'}">
+                <a
+                  class="text-xs uppercase py-3 font-bold block"
+                  routerLink="/manage-users"
+                  routerLinkActive="text-white"
+                  [class.disabled]="userDetails.role !== 'ADMIN'"
+                >
+                  Manage Users
+                </a>
+              </li>
+            </ul>
+           
+          </div>
+          
+        </li>
+        <li class="items-center">
+          <a
+            class="text-xs uppercase py-3 font-bold block"
+            routerLink="/profile"
+            routerLinkActive="text-white"
+          >
+            <i class="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>
+            Profile Page
+          </a>
+        </li>
+        <li class="items-center">
+          <div
+            class="text-xs uppercase py-3 font-bold block"
+          >
+            <i class="fas fa-users text-blueGray-400 mr-2 text-sm"></i>
+            Products
+            <i
+            class="fas fa-caret-down ml-2 cursor-pointer"
+            (click)="toggleDropdownProduct()"
+          ></i>
+          </div>
+          
+          <div>
+            <!-- Sidebar content -->
+            <ul
+              *ngIf="isProductDropdownOpen"
+              class="ml-6 mt-2 space-y-2 transition-all duration-300 ease-in-out"
+            >
+              <li class="items-center" [ngClass]="{'disabled': userDetails.role !== 'ADMIN'}">
+                <a
+                  class="text-xs uppercase py-3 font-bold block"
+                  routerLink="/add-product"
+                  routerLinkActive="text-white"
+                  [class.disabled]="userDetails.role !== 'ADMIN'"
+                >
+                  Add Product
+                </a>
+              </li>
+              <li class="items-center" [ngClass]="{'disabled': userDetails.role !== 'ADMIN'}">
+                <a
+                  class="text-xs uppercase py-3 font-bold block"
+                  routerLink="/manage-product"
+                  routerLinkActive="text-white"
+                  [class.disabled]="userDetails.role !== 'ADMIN'"
+                >
+                  Manage Product
+                </a>
+              </li>
+            </ul>
+           
+          </div>
+          
+        </li>
+        <li class="items-center">
+          <div
+            class="text-xs uppercase py-3 font-bold block"
+          >
+            <i class="fas fa-clipboard-list text-blueGray-400 mr-2 text-sm"></i>
+            Sales
+            <i
+            class="fas fa-caret-down ml-2 cursor-pointer"
+            (click)="toggleDropdown()"
+          ></i>
+          </div>
+          
+          <div>
+            <!-- Sidebar content -->
+            <ul
+              *ngIf="isUserDropdownOpen"
+              class="ml-6 mt-2 space-y-2 transition-all duration-300 ease-in-out"
+            >
+              <li class="items-center">
+                <a
+                  class="text-xs uppercase py-3 font-bold block"
+                  routerLink="/orders"
+                  routerLinkActive="text-white"
+                  
+                >
+                  Orders
+                </a>
+              </li>
+              <li class="items-center">
+                <a
+                  class="text-xs uppercase py-3 font-bold block"
+                  routerLink="/basket"
+                  routerLinkActive="text-white"
+                 
+                >
+                 Basket
+                </a>
+              </li>
+            </ul>
+           
+          </div>
+          
+        </li>
+        <li class="items-center">
+          <a
+            class="text-xs uppercase py-3 font-bold block"
+            routerLink="/reports"
+            routerLinkActive="text-white"
+          >
+            <i class="fas fa-tools text-blueGray-300 mr-2 text-sm"></i>
+            Reports
+          </a>
+        </li>
+      </ul>
+      
+      <!-- Divider -->
+      <hr class="my-4 md:min-w-full" />
+      <!-- Heading -->
+      <h6
+        class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+      >
+        Navigation
+      </h6>
+      <!-- Navigation -->
+      <ul
+        class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4"
+      >
+        <li class="inline-flex">
+          <a
+            class="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
+            href="/"
+            ><i
+              class="fas fa-newspaper mr-2 text-blueGray-400 text-base"
+            ></i>
+            LANDING PAGE</a
+          >
+        </li>
+        <li class="inline-flex">
+          <a
+            class="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
+            href="/login"
+            ><i class="fas fa-fingerprint mr-2 text-blueGray-400 text-base"></i>
+            LOGIN</a
+          >
+        </li>
+        <li class="inline-flex">
+          <a
+            class="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
+            href="/signup"
+            ><i class="fas fa-clipboard-list mr-2 text-blueGray-400 text-base"></i>
+            REGISTER</a
+          >
+        </li>
+        <li class="inline-flex">
+          <button 
+            (click)="logout()" 
+            class="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
+          >
+            <i class="fas fa-sign-out-alt mr-2 text-blueGray-400 text-base"></i>
+            Logout
+          </button>
+        </li>
+      </ul>
+    </div>
+</nav>

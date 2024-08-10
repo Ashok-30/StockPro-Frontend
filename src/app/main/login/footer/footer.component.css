@@ -1,0 +1,10 @@
+.footer-fixed {
+    background: linear-gradient(to right, #1ebcff, #1ebcff, #1ebcff); 
+    color: #E5E7EB; 
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .footer-logo {
+    width: 80px; /* Adjust as necessary */
+    height: 80px; /* Adjust as necessary */
+  }

@@ -1,0 +1,87 @@
+<app-sidebar></app-sidebar>
+
+<div class="relative md:ml-64 bg-blueGray-100">
+  <div class="relative bg-white-200 md:pt-32 pb-500 pt-12" style="padding-top: 0rem;">
+    <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
+      <div class="flex justify-between items-center px-4 py-2 text-black">
+        <div class="flex items-center">
+          <h1 class="text-xl font-bold">Orders</h1>
+        </div>
+      </div>
+
+      <div class="container mx-auto my-8">
+        <div *ngIf="message" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4">
+          {{ message }}
+        </div>
+        
+
+
+        <div class="flex justify-between items-center mb-4">
+          
+          <span>Show {{ pageSize }} entries
+            <select [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChange()" class="px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+            </select>
+          </span>
+    <!-- View Basket Button -->
+<button [class]="viewBasketEnabled ? 'bg-blue-500 hover:bg-blue-700 text-white px-2 py-1 rounded-md' : 'bg-gray-400 text-white px-2 py-1 rounded-md'"
+[disabled]="!viewBasketEnabled"
+(click)="viewBasket()">View Basket</button>
+
+          <input type="text" class="px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search">
+        </div>
+        
+      
+          
+          <table class="w-full">
+            <thead>
+              <tr class="bg-gray-100">
+                <th class="px-4 py-2 text-left">Name</th>
+                <th class="px-4 py-2 text-left">Category</th>
+                <th class="px-4 py-2 text-left">Available Qty</th>
+                <th class="px-4 py-2 text-left">Price</th>
+                <th class="px-4 py-2 text-left">Select Qty</th>
+                <th class="px-4 py-2 text-left">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of products">
+                <td class="px-4 py-2">{{ product.name }}</td>
+                <td class="px-4 py-2">{{ product.category }}</td>
+                <td class="px-4 py-2">{{ product.quantity }}</td>
+                <td class="px-4 py-2">{{ product.price }}</td>
+                <td>
+                  <input type="number" [(ngModel)]="product.selectedQty" class="fixed-size-input" [min]="1" [max]="product.quantity">
+                </td>
+                <td>
+                  <button [class]="product.isAdded ? 'bg-gray-400 text-white px-2 py-1 rounded-md' : 'bg-green-500 hover:bg-green-700 text-white px-2 py-1 rounded-md'"
+                  [disabled]="product.isAdded"
+                  (click)="addToBasket(product, product.selectedQty)">Add to basket</button>
+          
+          
+                </td>
+                  
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="flex justify-between items-center mt-4">
+            <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md" (click)="previousPage()">Previous</button>
+            <span>Page {{ currentPage }} of {{ totalProducts / pageSize | ceil }}</span>
+            <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md" (click)="nextPage()">Next</button>
+          </div>
+        </div>
+        
+        </div>
+      </div>
+
+      <div class="text-xs text-gray-500 mt-4 text-center">
+        Copyright © 2024-2024. All rights reserved. Version 1.0.0
+      </div>
+
+
+
+

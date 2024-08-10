@@ -1,0 +1,75 @@
+<app-sidebar></app-sidebar>
+<div class="relative md:ml-64 bg-blueGray-100">
+ 
+    <div class="relative bg-white-200 md:pt-32 pb-500 pt-12">
+    
+  <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
+    <div class="custom-lg-w-40 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
+      <div class="text-center">
+        <h1 class="text-2xl font-medium title-font mb-4 text-gray-400 tracking-widest">
+          Welcome to User Onboarding
+        </h1>
+        <img src="assets/images/add-user.jpg" alt="Sign Up Image" class="object-cover object-center rounded-lg w-full h-full">
+      </div>
+      
+    </div>
+    <div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0"style="margin-right: auto">
+      <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Add User</h2>
+      <p class="leading-relaxed mb-5">Add a new user to your store with the appropriate role!</p>
+      <form (ngSubmit)="onSubmit(addUserForm)" #addUserForm="ngForm" novalidate>
+        <div class="relative mb-4">
+          <label for="name" class="text-gray-900 text-lg font-small title-font mb-5">Name</label>
+          <input type="text" id="name" name="name" [(ngModel)]="user.name" required minlength="3" class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          <div *ngIf="addUserForm.submitted && addUserForm.controls['name']?.errors">
+            <small class="text-red-500" *ngIf="addUserForm.controls['name'].errors?.['required']">Name is required.</small>
+            <small class="text-red-500" *ngIf="addUserForm.controls['name'].errors?.['minlength']">Name must be at least 3 characters long.</small>
+          </div>
+        </div>
+        <div class="relative mb-4">
+          <label for="contactNumber" class="text-gray-900 text-lg font-small title-font mb-5">Contact Number</label>
+          <input type="text" id="contactNumber" name="contactNumber" [(ngModel)]="user.contactNumber" required pattern="^[0-9]{10}$" class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          <div *ngIf="addUserForm.submitted && addUserForm.controls['contactNumber']?.errors">
+            <small class="text-red-500" *ngIf="addUserForm.controls['contactNumber'].errors?.['required']">Contact Number is required.</small>
+            <small class="text-red-500" *ngIf="addUserForm.controls['contactNumber'].errors?.['pattern']">Contact Number must be 10 digits long.</small>
+          </div>
+        </div>
+        <div class="relative mb-4">
+          <label for="email" class="text-gray-900 text-lg font-small title-font mb-5">Email</label>
+          <input type="email" id="email" name="email" [(ngModel)]="user.email" required email class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          <div *ngIf="addUserForm.submitted && addUserForm.controls['email']?.errors">
+            <small class="text-red-500" *ngIf="addUserForm.controls['email'].errors?.['required']">Email is required.</small>
+            <small class="text-red-500" *ngIf="addUserForm.controls['email'].errors?.['email']">Invalid email format.</small>
+          </div>
+        </div>
+        <div class="relative mb-4">
+          <label for="password" class="text-gray-900 text-lg font-small title-font mb-5">Password</label>
+          <input type="password" id="password" name="password" [(ngModel)]="user.password" required minlength="6" class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          <div *ngIf="addUserForm.submitted && addUserForm.controls['password']?.errors">
+            <small class="text-red-500" *ngIf="addUserForm.controls['password'].errors?.['required']">Password is required.</small>
+            <small class="text-red-500" *ngIf="addUserForm.controls['password'].errors?.['minlength']">Password must be at least 6 characters long.</small>
+          </div>
+        </div>
+        <div class="relative mb-4">
+          <label for="role" class="text-gray-900 text-lg font-small title-font mb-5">Role</label>
+          <select id="role" name="role" [(ngModel)]="user.role" required class="w-full bg-white rounded border border-orange-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            <option value="MANAGER">Manager</option>
+            <option value="EMPLOYEE">Employee</option>
+          </select>
+          <div *ngIf="addUserForm.submitted && addUserForm.controls['role']?.errors">
+            <small class="text-red-500" *ngIf="addUserForm.controls['role'].errors?.['required']">Role is required.</small>
+          </div>
+        </div>
+        <button type="submit" class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">Add User</button>
+      </form>
+      <div *ngIf="message" class="text-xs text-gray-400 text-opacity-90 mt-3">{{ message }}</div>
+      
+    </div>
+   
+  </div>
+  
+
+</div>
+<div class="text-xs text-gray-500 mt-4 text-center">
+  Copyright © 2024-2024. All rights reserved. Version 1.0.0
+</div>
+</div>

@@ -1,0 +1,64 @@
+<app-header></app-header>
+<section class="text-gray-600 body-font" style="margin-top: -1rem; margin-bottom: 0rem; padding-top:86px;">
+  <div class="container px-5 py-24 mx-auto flex flex-wrap items-center" style="padding-top: 1rem;">
+    <div class="custom-lg-w-40 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
+      <img src="assets/images/signUp.png" alt="Sign Up Image" class="object-cover object-center rounded-lg w-full h-full">
+    </div>
+    <div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
+      <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Sign Up</h2>
+      <p class="leading-relaxed mb-5">Join us today and take control of your inventory with seamless efficiency!</p>
+      <form (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm" novalidate>
+        <div class="relative mb-4">
+          <label for="name" class="text-gray-900 text-lg font-small title-font mb-5">Name</label>
+          <input type="text" id="name" name="name" [(ngModel)]="user.name" required minlength="3" class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          <div *ngIf="signupForm.submitted && signupForm.controls['name']?.errors">
+            <small class="text-red-500" *ngIf="signupForm.controls['name'].errors?.['required']">Name is required.</small>
+            <small class="text-red-500" *ngIf="signupForm.controls['name'].errors?.['minlength']">Name must be at least 3 characters long.</small>
+          </div>
+        </div>
+        <div class="relative mb-4">
+          <label for="contactNumber" class="text-gray-900 text-lg font-small title-font mb-5">Contact Number</label>
+          <input type="text" id="contactNumber" name="contactNumber" [(ngModel)]="user.contactNumber" required pattern="^[0-9]{10}$" class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          <div *ngIf="signupForm.submitted && signupForm.controls['contactNumber']?.errors">
+            <small class="text-red-500" *ngIf="signupForm.controls['contactNumber'].errors?.['required']">Contact Number is required.</small>
+            <small class="text-red-500" *ngIf="signupForm.controls['contactNumber'].errors?.['pattern']">Contact Number must be 10 digits long.</small>
+          </div>
+        </div>
+        <div class="relative mb-4">
+          <label for="email" class="text-gray-900 text-lg font-small title-font mb-5">Email</label>
+          <input type="email" id="email" name="email" [(ngModel)]="user.email" required email class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          <div *ngIf="signupForm.submitted && signupForm.controls['email']?.errors">
+            <small class="text-red-500" *ngIf="signupForm.controls['email'].errors?.['required']">Email is required.</small>
+            <small class="text-red-500" *ngIf="signupForm.controls['email'].errors?.['email']">Invalid email format.</small>
+          </div>
+        </div>
+        <div class="relative mb-4">
+          <label for="storeName" class="text-gray-900 text-lg font-small title-font mb-5">Store Name</label>
+          <input type="text" id="storeName" name="storeName" [(ngModel)]="user.storeName" required  class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          <div *ngIf="signupForm.submitted && signupForm.controls['storeName']?.errors">
+            <small class="text-red-500" *ngIf="signupForm.controls['storeName'].errors?.['required']">Store Name is required.</small>
+          </div>
+        </div>
+        <div class="relative mb-4">
+          <label for="storeAddress" class="text-gray-900 text-lg font-small title-font mb-5">Store Address</label>
+          <input type="text" id="storeAddress" name="storeAddress" [(ngModel)]="user.storeAddress" required  class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          <div *ngIf="signupForm.submitted && signupForm.controls['storeAddress']?.errors">
+            <small class="text-red-500" *ngIf="signupForm.controls['storeAddress'].errors?.['required']">Store Address is required.</small>
+          </div>
+        </div>
+
+        <div class="relative mb-4">
+          <label for="password" class="text-gray-900 text-lg font-small title-font mb-5">Password</label>
+          <input type="password" id="password" name="password" [(ngModel)]="user.password" required minlength="6" class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+          <div *ngIf="signupForm.submitted && signupForm.controls['password']?.errors">
+            <small class="text-red-500" *ngIf="signupForm.controls['password'].errors?.['required']">Password is required.</small>
+            <small class="text-red-500" *ngIf="signupForm.controls['password'].errors?.['minlength']">Password must be at least 6 characters long.</small>
+          </div>
+        </div>
+        <button type="submit" class="text-white bg-[#1ebcff] border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg">Sign Up</button>
+      </form>
+      <div *ngIf="message" class="text-xs text-gray-400 text-opacity-90 mt-3">{{ message }}</div>
+    </div>
+  </div>
+</section>
+

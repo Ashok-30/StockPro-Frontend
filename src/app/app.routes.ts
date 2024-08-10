@@ -1,11 +1,16 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { SignupComponent } from './signup/signup.component';
-import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './main/login/home/home.component';
+import { SignupComponent } from './main/login/signup/signup.component';
+import { LoginComponent } from './main/login/login.component';
+import { DashboardComponent } from './dash/dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
-import { AddUserComponent } from './add-user/add-user.component';
-import { ManageUsersComponent } from './manage-users/manage-users.component';
+import { AddUserComponent } from './users/add-user/add-user.component';
+import { ManageUsersComponent } from './users/add-user/manage-users/manage-users.component';
+import { AddProductComponent } from './products/add-product/add-product.component';
+import { ManageProductComponent } from './products/manage-product/manage-product.component';
+import { OrdersComponent } from './sales/orders/orders.component';
+import { BasketComponent } from './sales/orders/basket/basket.component';
+
 
 
 export const routes: Routes = [
@@ -15,5 +20,11 @@ export const routes: Routes = [
   { path: 'dashboard', title: 'Dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'add-user', title: 'Add User', component: AddUserComponent, canActivate: [AuthGuard] },
   { path: 'manage-users', title: 'Manage User', component: ManageUsersComponent, canActivate: [AuthGuard] },
+  { path: 'add-product', title: 'Add Product', component: AddProductComponent, canActivate: [AuthGuard] },
+  { path: 'manage-product', title: 'Manage Products', component: ManageProductComponent, canActivate: [AuthGuard] },
+  { path: 'orders', title: 'Orders', component: OrdersComponent, canActivate: [AuthGuard] },
+  { path: 'basket', title: 'Basket', component: BasketComponent, canActivate: [AuthGuard] },
+
+
  
 ];

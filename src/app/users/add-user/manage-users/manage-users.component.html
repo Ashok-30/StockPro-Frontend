@@ -1,0 +1,77 @@
+<app-sidebar></app-sidebar>
+<div class="relative md:ml-64 bg-white min-h-screen">
+    <div class="container px-5 py-24 mx-auto">
+        <div class="flex flex-col text-center w-full mb-20">
+            <h1 class="text-2xl font-medium title-font mb-4 text-gray-900 tracking-widest">Manage Users</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-600">
+                Browse and manage users efficiently and seamlessly.
+            </p>
+        </div>
+        <div class="flex flex-wrap -m-4">
+            <div *ngFor="let user of users" class="p-4 lg:w-1/2">
+                <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left bg-white shadow-lg rounded-lg">
+                    <img alt="user" class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src="https://dummyimage.com/200x200">
+                    <div class="flex-grow sm:pl-8">
+                        <h2 class="title-font font-medium text-lg text-gray-900">{{ user.name }}</h2>
+                        <h3 class="text-gray-500 mb-3">{{ user.role }}</h3>
+                        <p class="mb-4">Email: {{ user.email }}</p>
+                        <p class="mb-4">Contact: {{ user.contactNumber }}</p>
+                        <span class="inline-flex">
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="selectUser(user)">Edit</button>
+                            <button class="bg-red-500 hover:bg-red-700 ml-4 text-white font-bold py-2 px-4 rounded" (click)="deleteUser(user)">Delete</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <ng-template #noUsers>
+        <p class="text-gray-500 text-center">No users found.</p>
+    </ng-template>
+
+    <app-confirm-modal *ngIf="showModal" [message]="'Are you sure you want to delete ' + userToDelete.name + '?'"
+                       [showConfirmButtons]="true" (confirmed)="confirmDelete($event)"></app-confirm-modal>
+    <app-confirm-modal *ngIf="showSuccessModal" [message]="'User deleted successfully!'"
+                       [showConfirmButtons]="false" (confirmed)="handleSuccessModalClose()"></app-confirm-modal>
+
+    <div *ngIf="selectedUser" class="edit-overlay">
+        <div class="edit-form-container">
+            <h3 class="text-gray-900 text-center">Edit User</h3>
+            <form (ngSubmit)="updateUser()" class="bg-white p-8 rounded-lg">
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                    <input [(ngModel)]="selectedUser.name" name="name" type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                    <input [(ngModel)]="selectedUser.email" name="email" type="email" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email">
+                </div>
+                <div class="mb-4">
+                    <label for="role" class="block text-gray-700 text-sm font-bold mb-2">Role</label>
+                    <select [(ngModel)]="selectedUser.role" name="role" required 
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            id="role">
+                        <option value="MANAGER">Manager</option>
+                        <option value="EMPLOYEE">Employee</option>
+                    </select>
+                </div>
+                
+    
+           
+                <div class="mb-4">
+                    <label for="contactNumber" class="block text-gray-700 text-sm font-bold mb-2">Phone Number</label>
+                    <input [(ngModel)]="selectedUser.contactNumber" name="contactNumber" type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="contactNumber">
+                </div>
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update</button>
+                    <button type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" (click)="cancelEdit()">Cancel</button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+    <div class="text-xs text-gray-500 mt-4 text-center">
+        Copyright © 2024-2024. All rights reserved. Version 1.0.0
+      </div>
+</div>

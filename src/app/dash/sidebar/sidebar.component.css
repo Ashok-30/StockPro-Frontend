@@ -1,0 +1,23 @@
+.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+  @media (max-width: 768px) {
+    nav {
+      padding: 1rem;
+      flex-direction: column;
+    }
+  
+    .md:flex-col {
+      display: block;
+    }
+  
+    .md:min-w-full {
+      width: 100%;
+    }
+  
+    .md:items-stretch {
+      align-items: start;
+    }
+  }
+  

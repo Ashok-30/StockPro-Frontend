@@ -1,0 +1,51 @@
+
+
+  
+
+
+  
+  placeOrder() {
+    const saleRequests = this.basketItems.map(item => ({
+      productId: item.id,
+      quantity: item.quantity
+    }));
+
+    this.productService.sellProducts(saleRequests).pipe(
+      switchMap(response => {
+        console.log('Products sold successfully:', response);
+        this.message = response;
+        this.message = response;
+        const productIds = this.basketItems.map(item => item.id).join(',');
+        const orderData = {
+          customerName: this.customerName,
+          customerNumber: this.customerPhone,
+          productIds,
+          totalAmount: this.grossAmount
+        };
+        return this.productService.addOrder(orderData);
+      }),
+      catchError(error => {
+        console.error('Error in selling products:', error);
+        return of('Failed to sell products');
+      })
+    ).subscribe({
+      next: orderResponse => {
+        console.log('Order added successfully:', orderResponse);
+        this.resetBasket();
+        setTimeout(() => {
+          this.router.navigate(['/orders']);
+        }, 2000);
+      },
+      error: error => {
+        console.error('Error placing order:', error);
+      }
+    });
+  }
+  private resetBasket() {
+    this.basketItems = [];  
+    this.updateGrossAmount();  
+
+    this.customerName = '';
+    this.customerPhone = '';
+}
+}
