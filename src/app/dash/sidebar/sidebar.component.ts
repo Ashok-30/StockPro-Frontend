@@ -16,6 +16,7 @@ export class SidebarComponent implements OnInit {
   isUserDropdownOpen = false;
   isProductDropdownOpen = false;
   isSalesDropdownOpen = false;
+  isPurchaseDropdownOpen = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -65,6 +66,9 @@ export class SidebarComponent implements OnInit {
   toggleDropdownSales() {
     this.isSalesDropdownOpen = !this.isSalesDropdownOpen;
   }
+  toggleDropdownPurchase() {
+    this.isPurchaseDropdownOpen = !this.isPurchaseDropdownOpen;
+  }
 
 
   checkCurrentRoute() {
@@ -72,5 +76,6 @@ export class SidebarComponent implements OnInit {
     this.isProductDropdownOpen = currentRoute === '/add-product' || currentRoute === '/manage-product';
     this.isUserDropdownOpen = currentRoute === '/add-user' || currentRoute === '/manage-users';
     this.isSalesDropdownOpen = currentRoute === '/orders' || currentRoute === '/basket';
+    this.isPurchaseDropdownOpen = currentRoute === '/purchase' || currentRoute === '/add-purchase';
   }
 }

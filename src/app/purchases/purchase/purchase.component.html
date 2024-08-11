@@ -9,22 +9,25 @@
   <div class="relative bg-white-200 md:pt-32 pb-500 pt-12" style="padding-top: 0rem;">
     <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
       <div class="flex justify-between items-center px-4 py-2 text-black">
-        <div class="flex items-center">
-          <h1 class="text-xl font-bold">Manage Products</h1>
+        <div class="flex justify-between items-center px-4 py-2 text-black">
+          <div class="flex items-center">
+            <h1 class="text-xl font-bold">Manage Purchase</h1>
+          </div>
+          
         </div>
+        
       </div>
 
       <div class="container mx-auto my-8">
         <div *ngIf="message" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4">
           {{ message }}
         </div>
-        
+        <div class="flex justify-end mb-4">
+          <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded-md mr-2" (click)="downloadExcel()">
+  <i class="fas fa-download"></i> Download as Excel
+</button>
 
-
-        
-        
-      
-          
+        </div>
           <table class="w-full">
             <thead>
               <tr class="bg-gray-100">

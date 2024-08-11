@@ -100,6 +100,7 @@ export class ManageProductComponent implements OnInit {
   }
 
   confirmDelete(confirmed: boolean): void {
+    this.showModal = false;
     if (confirmed && this.productToDelete) {
       this.productService.deleteProduct(this.productToDelete.id).subscribe(
         response => {

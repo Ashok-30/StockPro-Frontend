@@ -167,6 +167,49 @@
           
         </li>
         <li class="items-center">
+          <div
+            class="text-xs uppercase py-3 font-bold block"
+          >
+            <i class="fas fa-users text-blueGray-400 mr-2 text-sm"></i>
+            Purchase
+            <i
+            class="fas fa-caret-down ml-2 cursor-pointer"
+            (click)="toggleDropdownPurchase()"
+          ></i>
+          </div>
+          
+          <div>
+            <!-- Sidebar content -->
+            <ul
+              *ngIf="isPurchaseDropdownOpen"
+              class="ml-6 mt-2 space-y-2 transition-all duration-300 ease-in-out"
+            >
+              <li class="items-center" [ngClass]="{'disabled': userDetails.role !== 'ADMIN' && userDetails.role !== 'MANAGER'}">
+                <a
+                  class="text-xs uppercase py-3 font-bold block"
+                  routerLink="/add-purchase"
+                  routerLinkActive="text-white"
+                  [class.disabled]="userDetails.role !== 'ADMIN' && userDetails.role !== 'MANAGER'"
+                >
+                  Add Purchase
+                </a>
+              </li>
+              <li class="items-center" [ngClass]="{'disabled': userDetails.role !== 'ADMIN' && userDetails.role !== 'MANAGER'}">
+                <a
+                  class="text-xs uppercase py-3 font-bold block"
+                  routerLink="/purchase"
+                  routerLinkActive="text-white"
+                  [class.disabled]="userDetails.role !== 'ADMIN' && userDetails.role !== 'MANAGER'"
+                >
+                  Manage Purchase
+                </a>
+              </li>
+            </ul>
+           
+          </div>
+          
+        </li>
+        <li class="items-center">
           <a
             class="text-xs uppercase py-3 font-bold block"
             routerLink="/reports"

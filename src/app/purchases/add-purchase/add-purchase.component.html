@@ -1,0 +1,71 @@
+<app-sidebar></app-sidebar>
+
+<div class="relative md:ml-64 bg-blueGray-100">
+  <div class="relative bg-white-200 md:pt-32 pb-500 pt-12"style="padding-top: 3rem;">
+    
+    <div class="container px-5 py-24 mx-auto flex flex-wrap items-center"style="padding-top: 0rem;">
+
+        <h2 class="text-gray-900 text-lg font-medium title-font mb-5  w-full">Add Product for Store</h2>
+        <p class="leading-relaxed mb-5  w-full">Add Product for next Purchase</p>
+        <div *ngIf="message" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 animate-fade-out">
+          {{ message }}
+        </div>
+
+        <div class="bg-[#caf0f8] rounded-lg p-8 flex flex-col md:ml-auto  mt-10 md:mt-0" style="margin-right: auto; width: 100%">
+        <form (ngSubmit)="onSubmit(addProductForm)" #addProductForm="ngForm" novalidate>
+          <div class="flex">
+            <div class=" mb-4 w-full">
+              <label for="name" class="text-gray-900 text-lg font-small title-font mb-5">Name</label>
+              <input type="text" id="name" name="name" [(ngModel)]="purchase.name" required minlength="3" class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+              <div *ngIf="addProductForm.submitted && addProductForm.controls['name']?.errors">
+                <small class="text-red-500" *ngIf="addProductForm.controls['name'].errors?.['required']">Name is required.</small>
+                <small class="text-red-500" *ngIf="addProductForm.controls['name'].errors?.['minlength']">Name must be at least 3 characters long.</small>
+              </div>
+            </div>
+          </div>
+          
+          
+          <div class="flex">
+            <div class="w-full mb-4">
+              <label for="price" class="text-gray-900 text-lg font-small title-font mb-5">Price</label>
+              <input type="number" id="price" name="price" [(ngModel)]="purchase.price" required [min]="1"class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+              <div *ngIf="addProductForm.submitted && addProductForm.controls['price']?.errors">
+                <small class="text-red-500" *ngIf="addProductForm.controls['price'].errors?.['required']">Price is required.</small>
+              </div>
+            </div>
+            <div class="w-full mb-4" style="margin-left: 5%;">
+              <label for="supplier" class="text-gray-900 text-lg font-small title-font mb-5">Supplier</label>
+              <input type="text" id="supplier" name="supplier" [(ngModel)]="purchase.supplier" required  class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+              <div *ngIf="addProductForm.submitted && addProductForm.controls['supplier']?.errors">
+                <small class="text-red-500" *ngIf="addProductForm.controls['supplier'].errors?.['required']">Supplier is required.</small>
+              </div>
+            </div>
+          </div>
+          <div class="flex">
+            <div class="w-full mb-4">
+              <label for="quantity" class="text-gray-900 text-lg font-small title-font mb-5">Quantity</label>
+              <input type="number" id="quantity" name="quantity" [(ngModel)]="purchase.quantity" required [min]="1"class="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+              <div *ngIf="addProductForm.submitted && addProductForm.controls['quantity']?.errors">
+                <small class="text-red-500" *ngIf="addProductForm.controls['quantity'].errors?.['required']">Quantity is required.</small>
+              </div>
+            </div>
+            
+            
+          </div>
+          <div class="flex"style="justify-content: center">
+           
+            <button type="submit" class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">Add Purchase</button>
+          </div>
+
+          
+        </form>
+        
+      </div>
+     
+    </div>
+    <div class="text-xs text-gray-500 mt-4 text-center">
+      Copyright © 2024-2024. All rights reserved. Version 1.0.0
+    </div>
+  </div>
+
+</div>

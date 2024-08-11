@@ -98,6 +98,7 @@ export class BasketComponent implements OnInit, OnDestroy {
           customerNumber: this.customerPhone,
           productIds,
           totalAmount: this.grossAmount
+          
         };
         return this.productService.addOrder(orderData);
       }),

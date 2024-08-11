@@ -33,7 +33,7 @@ export class PurchaseService {
     return this.http.get<Purchase>(`${this.apiUrl}/${id}`, { headers });
   }
 
-  addPurchase(purchase: Purchase): Observable<Purchase> {
+  addPurchase(purchase: any): Observable<Purchase> {
     const headers = this.getHeaders();
     return this.http.post<Purchase>(this.apiUrl, purchase, { headers });
   }

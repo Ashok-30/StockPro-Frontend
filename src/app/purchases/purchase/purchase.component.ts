@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Purchase } from '../../purchase.model';
-import { PurchaseService } from '../purchase.service';
+import { Purchase } from '../../../purchase.model';
+import { PurchaseService } from '../../purchase.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SidebarComponent } from '../dash/sidebar/sidebar.component';
-import { timer } from 'rxjs';
-import { ConfirmModalComponent } from '../dash/confirm-modal/confirm-modal.component';
+import { SidebarComponent } from '../../dash/sidebar/sidebar.component';
 
+import { ConfirmModalComponent } from '../../dash/confirm-modal/confirm-modal.component';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-purchase',
   standalone: true,
@@ -56,22 +57,7 @@ export class PurchaseComponent implements OnInit {
     }
   }
 
-  addPurchase(): void {
-    if (this.selectedPurchase) {
-      this.purchaseService.addPurchase(this.selectedPurchase).subscribe({
-        next: () => {
-          this.fetchPurchases();
-          this.selectedPurchase = null;
-          this.message = 'Purchase added successfully!';
-          setTimeout(() => this.message = null, 1500);
-        },
-        error: (error) => {
-          console.error('Error adding purchase:', error);
-          this.message = 'Error adding purchase';
-        }
-      });
-    }
-  }
+
 
   deletePurchase(id: number): void {
    
@@ -82,6 +68,7 @@ export class PurchaseComponent implements OnInit {
 
  
   confirmDelete(confirmed: boolean): void {
+    this.showModal = false;
     if (confirmed && this.purchaseToDelete) {
       this.purchaseService.deletePurchase(this.purchaseToDelete.id!).subscribe({
         next: () => {
@@ -107,5 +94,19 @@ export class PurchaseComponent implements OnInit {
 
   cancelEdit(): void {
     this.selectedPurchase = null;
+  }
+  downloadExcel(): void {
+    // Create a new workbook and name the sheet
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.purchases);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Purchases');
+
+    // Write the workbook to a blob
+    const wbout: Blob = new Blob([XLSX.write(wb, { bookType: 'xlsx', type: 'array' })], {
+      type: 'application/octet-stream'
+    });
+
+    // Save the file
+    saveAs(wbout, 'Purchases.xlsx');
   }
 }
