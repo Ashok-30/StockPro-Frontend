@@ -70,4 +70,20 @@ searchProducts(name: string): Observable<any> {
   return this.http.get(`${this.apiUrl}/search`, { headers: headers, params: new HttpParams().set('name', name) });
 }
   
+
+
+getAllPurchases(id: number): Observable<any> {
+  return this.http.get(`${this.apiUrl1}/purchase/${id}`, { headers: this.getHeaders() });
+}
+
+
+
+updatePurchase(id: number, product: any): Observable<any> {
+  return this.http.put(`${this.apiUrl}/purchase/${id}`, product, { headers: this.getHeaders(), responseType: 'text' });
+}
+
+
+deletePurchase(id: number): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/purchase/${id}`, { headers: this.getHeaders(), responseType: 'text' });
+}
 }

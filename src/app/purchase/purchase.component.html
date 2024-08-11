@@ -1,0 +1,96 @@
+<div *ngIf="message" class="alert alert-info">{{ message }}</div>
+
+
+
+
+<app-sidebar></app-sidebar>
+
+<div class="relative md:ml-64 bg-blueGray-100">
+  <div class="relative bg-white-200 md:pt-32 pb-500 pt-12" style="padding-top: 0rem;">
+    <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
+      <div class="flex justify-between items-center px-4 py-2 text-black">
+        <div class="flex items-center">
+          <h1 class="text-xl font-bold">Manage Products</h1>
+        </div>
+      </div>
+
+      <div class="container mx-auto my-8">
+        <div *ngIf="message" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4">
+          {{ message }}
+        </div>
+        
+
+
+        
+        
+      
+          
+          <table class="w-full">
+            <thead>
+              <tr class="bg-gray-100">
+                <th class="px-4 py-2 text-left">Name</th>
+                <th class="px-4 py-2 text-left">Supplier</th>
+                <th class="px-4 py-2 text-left">Quantity</th>
+                <th class="px-4 py-2 text-left">Price</th>
+               
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let purchase of purchases">
+                <td class="px-4 py-2">{{ purchase.name }}</td>
+                <td class="px-4 py-2">{{ purchase.supplier }}</td>
+                <td class="px-4 py-2">{{ purchase.quantity }}</td>
+                <td class="px-4 py-2">{{ purchase.price }}</td>
+                <td class="px-4 py-2">
+                  <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md mr-2" (click)="selectPurchase(purchase)">Edit</button>
+                  <button class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md" (click)="deletePurchase(purchase.id)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          
+        
+        </div>
+      </div>
+      <app-confirm-modal *ngIf="showModal" [message]="'Are you sure you want to delete product ' + purchaseToDelete?.name + '?'" [showConfirmButtons]="true" (confirmed)="confirmDelete($event)"></app-confirm-modal>
+      <div class="text-xs text-gray-500 mt-4 text-center">
+        Copyright © 2024-2024. All rights reserved. Version 1.0.0
+      </div>
+
+
+      <div *ngIf="selectedPurchase" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-8 rounded-lg w-full max-w-md">
+          <h3 class="text-black text-center mb-4">Edit Product</h3>
+          <form (ngSubmit)="updatePurchase()" class="space-y-4">
+            <div>
+              <label class="block text-black-400 text-sm font-bold mb-2" for="name">Name</label>
+              <input [(ngModel)]="selectedPurchase.name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" required>
+            </div>
+          
+           
+            <div>
+              <label class="block text-black-400 text-sm font-bold mb-2" for="quantity">Quantity</label>
+              <input [(ngModel)]="selectedPurchase.quantity" name="quantity" class="shadow appearance-none border rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" id="quantity" type="number" required>
+            </div>
+          
+            <div>
+              <label class="block text-black-400 text-sm font-bold mb-2" for="price">Price</label>
+              <input [(ngModel)]="selectedPurchase.price" name="price" class="shadow appearance-none border rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" id="price" type="number" required>
+            </div>
+            <div>
+              <label class="block text-black-400 text-sm font-bold mb-2" for="supplier">Supplier</label>
+              <input [(ngModel)]="selectedPurchase.supplier" name="supplier" class="shadow appearance-none border rounded w-full py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline" id="supplier" type="text" required>
+            </div>
+           
+            
+            
+            <div class="flex justify-between">
+              <button type="submit" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update</button>
+              <button type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" (click)="cancelEdit()">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
