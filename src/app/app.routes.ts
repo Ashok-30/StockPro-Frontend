@@ -5,7 +5,7 @@ import { LoginComponent } from './main/login/login.component';
 import { DashboardComponent } from './dash/dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import { AddUserComponent } from './users/add-user/add-user.component';
-import { ManageUsersComponent } from './users/add-user/manage-users/manage-users.component';
+import { ManageUsersComponent } from './users/manage-users/manage-users.component';
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { ManageProductComponent } from './products/manage-product/manage-product.component';
 import { OrdersComponent } from './sales/orders/orders.component';

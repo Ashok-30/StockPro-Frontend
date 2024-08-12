@@ -13,7 +13,7 @@
       </div>
       
     </div>
-    <div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0"style="margin-right: auto">
+    <div class="lg:w-2/6 md:w-1/2 bg-gray-100  p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0"style="margin-right: auto">
       <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Add User</h2>
       <p class="leading-relaxed mb-5">Add a new user to your store with the appropriate role!</p>
       <form (ngSubmit)="onSubmit(addUserForm)" #addUserForm="ngForm" novalidate>
@@ -59,7 +59,7 @@
             <small class="text-red-500" *ngIf="addUserForm.controls['role'].errors?.['required']">Role is required.</small>
           </div>
         </div>
-        <button type="submit" class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">Add User</button>
+        <button type="submit" class="text-white bg-[#1ebcff] border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg">Add User</button>
       </form>
       <div *ngIf="message" class="text-xs text-gray-400 text-opacity-90 mt-3">{{ message }}</div>
       

@@ -21,7 +21,7 @@ export class ProductService {
   getHeaders() {
     const token = this.getToken();
     return new HttpHeaders({
-      'Content-Type': 'application/json',
+
       'Authorization': `Bearer ${token}`
     });
   }
@@ -65,6 +65,17 @@ sellProducts(saleRequests: any[]): Observable<string> {
 addOrder(orderData: Order): Observable<Order> {
   return this.http.post<Order>(`${this.apiUrl1}/orders`, orderData, { headers: this.getHeaders() });
 }
+
+uploadProductFile(file: File): Observable<any> {
+  const formData = new FormData();
+  formData.append('file', file);
+  const headers = this.getHeaders(); // Ensure headers are correctly set
+  return this.http.post(`${this.apiUrl}/upload`, formData, {
+    headers: headers,
+    responseType: 'text'  // Make sure this matches what the server sends back
+  });
+}
+
 searchProducts(name: string): Observable<any> {
   const headers = this.getHeaders();
   return this.http.get(`${this.apiUrl}/search`, { headers: headers, params: new HttpParams().set('name', name) });

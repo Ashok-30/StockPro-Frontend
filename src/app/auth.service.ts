@@ -90,8 +90,23 @@ export class AuthService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    return this.http.put(`${this.apiUrl}/users/${userId}`, userDetails, { headers });
+    return this.http.put(`${this.apiUrl}/admin/${userId}`, userDetails, { headers });
   }
+  updateUserImage(userId: number, userDetails: any, file: File): Observable<any> {
+    const token = this.getToken(); // Ensure you have a method to retrieve the stored token
+    const formData: FormData = new FormData();
+    formData.append('user', JSON.stringify(userDetails));
+    formData.append('file', file);
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    // Note: 'Content-Type' is not set because the browser will set it automatically with the boundary parameter
+    return this.http.put(`${this.apiUrl}/users/${userId}`, formData, { headers });
+  }
+  
+  
   deleteUser(userId: number): Observable<any> {
     const token = this.getToken();
     const headers = new HttpHeaders({
@@ -108,5 +123,7 @@ export class AuthService {
     });
     return this.http.get<any>(`${this.apiUrl}/users/profile`, { headers });
   }
+ 
+  
   
 }

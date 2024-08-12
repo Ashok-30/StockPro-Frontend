@@ -49,17 +49,17 @@
                 <td class="px-4 py-2">{{ product.quantity }}</td>
                 <td class="px-4 py-2">{{ product.price }}</td>
                 <td class="px-4 py-2">
-                  <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md mr-2" (click)="selectProduct(product)">Edit</button>
-                  <button class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md" (click)="deleteProduct(product)">Delete</button>
+                  <button class="edit-button bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md mr-2" (click)="selectProduct(product)"><i class="fas fa-edit"></i> Edit</button>
+                  <button class="delete-button bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md" (click)="deleteProduct(product)"><i class="fas fa-trash-alt"></i> Delete</button>
                 </td>
               </tr>
             </tbody>
           </table>
 
           <div class="flex justify-between items-center mt-4">
-            <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md" (click)="previousPage()">Previous</button>
+            <button class="bg-[#BCAAA4] hover:bg-blue-600 text-white px-2 py-1 rounded-md" (click)="previousPage()"><i class="fas fa-arrow-left"></i> Previous</button>
             <span>Page {{ currentPage }} of {{ totalProducts / pageSize | ceil }}</span>
-            <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md" (click)="nextPage()">Next</button>
+            <button class="bg-[#BCAAA4] hover:bg-blue-600 text-white px-2 py-1 rounded-md" (click)="nextPage()">Next <i class="fas fa-arrow-right"></i></button>
           </div>
         </div>
         

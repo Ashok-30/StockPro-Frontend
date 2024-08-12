@@ -6,19 +6,24 @@
             <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-600">
                 Browse and manage users efficiently and seamlessly.
             </p>
+            <div *ngIf="message" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 animate-fade-out">{{ message }}</div>
         </div>
         <div class="flex flex-wrap -m-4">
             <div *ngFor="let user of users" class="p-4 lg:w-1/2">
                 <div class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left bg-white shadow-lg rounded-lg">
-                    <img alt="user" class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src="https://dummyimage.com/200x200">
+                    <img alt="Profile Photo"
+                    class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
+                    [src]="user.profilePhotoUrl ? 'assets/images/' + user.profilePhotoUrl : 'assets/images/default.jpg'">
+               
+
                     <div class="flex-grow sm:pl-8">
                         <h2 class="title-font font-medium text-lg text-gray-900">{{ user.name }}</h2>
                         <h3 class="text-gray-500 mb-3">{{ user.role }}</h3>
                         <p class="mb-4">Email: {{ user.email }}</p>
                         <p class="mb-4">Contact: {{ user.contactNumber }}</p>
                         <span class="inline-flex">
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="selectUser(user)">Edit</button>
-                            <button class="bg-red-500 hover:bg-red-700 ml-4 text-white font-bold py-2 px-4 rounded" (click)="deleteUser(user)">Delete</button>
+                            <button class=" edit-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="selectUser(user)"><i class="fas fa-edit"></i> Edit</button>
+                            <button class="delete-button bg-red-500 hover:bg-red-700 ml-4 text-white font-bold py-2 px-4 rounded" (click)="deleteUser(user)"><i class="fas fa-trash-alt"></i> Delete</button>
                         </span>
                     </div>
                 </div>
@@ -38,7 +43,7 @@
     <div *ngIf="selectedUser" class="edit-overlay">
         <div class="edit-form-container">
             <h3 class="text-gray-900 text-center">Edit User</h3>
-            <form (ngSubmit)="updateUser()" class="bg-white p-8 rounded-lg">
+            <form (ngSubmit)="updateUserImage()" class="bg-white p-8 rounded-lg">
                 <div class="mb-4">
                     <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
                     <input [(ngModel)]="selectedUser.name" name="name" type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name">
@@ -63,6 +68,14 @@
                     <label for="contactNumber" class="block text-gray-700 text-sm font-bold mb-2">Phone Number</label>
                     <input [(ngModel)]="selectedUser.contactNumber" name="contactNumber" type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="contactNumber">
                 </div>
+                <div class="mb-4">
+                    <label for="profilePhotoUrl" class="block text-gray-700 text-sm font-bold mb-2">Profile Photo</label>
+                    <input type="file" (change)="onFileSelected($event)" />
+                </div>
+               
+`
+
+
                 <div class="flex items-center justify-between">
                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update</button>
                     <button type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" (click)="cancelEdit()">Cancel</button>

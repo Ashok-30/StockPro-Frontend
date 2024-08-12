@@ -29,8 +29,29 @@ export class AddProductComponent {
   };
 
   message: string | null = null;
-
+  selectedFile: File | null = null;
   constructor(private productService: ProductService, private router: Router) { }
+  onFileSelected(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.selectedFile = target.files ? target.files[0] : null;
+  }
+
+  uploadFile() {
+    if (this.selectedFile) {
+      this.productService.uploadProductFile(this.selectedFile).subscribe(
+        response => {
+          this.message = 'File uploaded successfully!';
+          timer(1500).subscribe(() => this.message = null);
+        },
+        error => {
+          console.error('Error uploading file:', error);
+          this.message = 'Failed to upload file.';
+        }
+      );
+    } else {
+      this.message = 'Please select a file to upload.';
+    }
+  }
 
   onSubmit(form: NgForm) {
     console.log('Product to be submitted', this.product);

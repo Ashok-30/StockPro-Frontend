@@ -23,10 +23,10 @@
           {{ message }}
         </div>
         <div class="flex justify-end mb-4">
-          <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded-md mr-2" (click)="downloadExcel()">
+          <button class="bg-[#009688] hover:bg-green-600 text-white px-2 py-1 rounded-md mr-2" (click)="downloadExcel()">
   <i class="fas fa-download"></i> Download as Excel
 </button>
-
+`
         </div>
           <table class="w-full">
             <thead>
@@ -45,8 +45,8 @@
                 <td class="px-4 py-2">{{ purchase.quantity }}</td>
                 <td class="px-4 py-2">{{ purchase.price }}</td>
                 <td class="px-4 py-2">
-                  <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md mr-2" (click)="selectPurchase(purchase)">Edit</button>
-                  <button class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md" (click)="deletePurchase(purchase.id)">Delete</button>
+                  <button class="edit-button bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md mr-2" (click)="selectPurchase(purchase)"><i class="fas fa-edit"></i> Edit</button>
+                  <button class="delete-button bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md" (click)="deletePurchase(purchase.id)"><i class="fas fa-trash-alt"></i> Delete</button>
                 </td>
               </tr>
             </tbody>

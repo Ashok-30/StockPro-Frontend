@@ -27,9 +27,9 @@
             </select>
           </span>
     <!-- View Basket Button -->
-<button [class]="viewBasketEnabled ? 'bg-blue-500 hover:bg-blue-700 text-white px-2 py-1 rounded-md' : 'bg-gray-400 text-white px-2 py-1 rounded-md'"
+<button [class]="viewBasketEnabled ? 'bg-[#2196F3] hover:bg-[#1976D2] text-white px-2 py-1 rounded-md' : 'bg-gray-400 text-white px-2 py-1 rounded-md'"
 [disabled]="!viewBasketEnabled"
-(click)="viewBasket()">View Basket</button>
+(click)="viewBasket()"><i class="fas fa-shopping-cart"></i> View Basket</button>
 
 
 <input type="text" [(ngModel)]="searchValue" (input)="searchProducts()" class="px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search">
@@ -58,9 +58,9 @@
                   <input type="number" [(ngModel)]="product.selectedQty" class="fixed-size-input" [min]="1" [max]="product.quantity">
                 </td>
                 <td>
-                  <button [class]="product.isAdded ? 'bg-gray-400 text-white px-2 py-1 rounded-md' : 'bg-green-500 hover:bg-green-700 text-white px-2 py-1 rounded-md'"
+                  <button [class]="product.isAdded ? 'bg-gray-400 text-white px-2 py-1 rounded-md' : 'bg-[#FF9800] hover:bg-[#FB8C00] text-white px-2 py-1 rounded-md'"
                   [disabled]="product.isAdded"
-                  (click)="addToBasket(product, product.selectedQty)">Add to basket</button>
+                  (click)="addToBasket(product, product.selectedQty)"><i class="fas fa-shopping-cart"></i> Add to basket</button>
           
           
                 </td>
@@ -70,9 +70,9 @@
           </table>
 
           <div class="flex justify-between items-center mt-4">
-            <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md" (click)="previousPage()">Previous</button>
+            <button class="bg-[#BCAAA4] hover:bg-blue-600 text-white px-2 py-1 rounded-md" (click)="previousPage()"><i class="fas fa-arrow-left"></i> Previous</button>
             <span>Page {{ currentPage }} of {{ totalProducts / pageSize | ceil }}</span>
-            <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md" (click)="nextPage()">Next</button>
+            <button class="bg-[#BCAAA4] hover:bg-blue-600 text-white px-2 py-1 rounded-md" (click)="nextPage()">Next <i class="fas fa-arrow-right"></i></button>
           </div>
         </div>
         

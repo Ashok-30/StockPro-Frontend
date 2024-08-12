@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
   }
   updateUser(): void {
     if (this.user.role === 'ADMIN') {
-      this.authService.updateUser(this.user.id, this.user).subscribe({
+      this.authService.updateUser(this.user.id, this.user,).subscribe({
         next: (response) => {
 
           this.message= 'Profile updated successfully';
