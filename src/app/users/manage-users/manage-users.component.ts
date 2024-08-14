@@ -48,6 +48,7 @@ export class ManageUsersComponent implements OnInit {
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
   }
+  
 
   updateUserImage(): void {
     if (this.selectedUser) {
@@ -55,11 +56,8 @@ export class ManageUsersComponent implements OnInit {
         this.authService.updateUserImage(this.selectedUser.id, this.selectedUser, this.selectedFile).subscribe(
           (response: any) => {
             console.log('User image updated successfully:', response);
-        
-            window.location.reload();
+            this.fetchUsers(); // Reload the user list to reflect changes
             this.resetForm();
-            
-           
           },
           (error) => {
             console.error('Error updating user image:', error);
@@ -71,7 +69,7 @@ export class ManageUsersComponent implements OnInit {
         this.authService.updateUser(this.selectedUser.id, this.selectedUser).subscribe(
           (response: any) => {
             console.log('User info updated successfully:', response);
-            window.location.reload();
+            this.fetchUsers(); // Reload the user list to reflect changes
             this.resetForm();
           },
           (error) => {
@@ -83,6 +81,7 @@ export class ManageUsersComponent implements OnInit {
       }
     }
   }
+  
   
 
   

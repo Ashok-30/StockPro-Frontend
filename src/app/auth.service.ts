@@ -97,14 +97,15 @@ export class AuthService {
     const formData: FormData = new FormData();
     formData.append('user', JSON.stringify(userDetails));
     formData.append('file', file);
-
+  
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
+      // Note: 'Content-Type' is not set because the browser will set it automatically with the boundary parameter
     });
-
-    // Note: 'Content-Type' is not set because the browser will set it automatically with the boundary parameter
+  
     return this.http.put(`${this.apiUrl}/users/${userId}`, formData, { headers });
   }
+  
   
   
   deleteUser(userId: number): Observable<any> {
