@@ -124,7 +124,24 @@ export class AuthService {
     });
     return this.http.get<any>(`${this.apiUrl}/users/profile`, { headers });
   }
- 
+  getUsersCountByStore(): Observable<number> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<number>(`${this.apiUrl}/users/count`, { headers });
+}
+
+getUsersGrowthByStore(): Observable<any> {
+  const token = this.getToken();
+  const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+  });
+  return this.http.get<any>(`${this.apiUrl}/users/growth`, { headers });
+}
+
   
   
 }

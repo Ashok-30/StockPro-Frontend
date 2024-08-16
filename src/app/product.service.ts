@@ -65,6 +65,15 @@ sellProducts(saleRequests: any[]): Observable<string> {
 addOrder(orderData: Order): Observable<Order> {
   return this.http.post<Order>(`${this.apiUrl1}/orders`, orderData, { headers: this.getHeaders() });
 }
+getDailySalesData(): Observable<any> {
+  return this.http.get<any>(`${this.apiUrl1}/orders/sales-data`, { headers: this.getHeaders() });
+}
+getTopSellingProducts(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.apiUrl1}/orders/top-selling-products`, { headers: this.getHeaders() });
+}
+getProductsBelowMinimum(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.apiUrl}/below-minimum`, { headers: this.getHeaders() });
+}
 
 uploadProductFile(file: File): Observable<any> {
   const formData = new FormData();

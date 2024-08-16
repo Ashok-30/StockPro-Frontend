@@ -60,7 +60,7 @@ export class ManageUsersComponent implements OnInit {
             this.resetForm();
           },
           (error) => {
-            console.error('Error updating user image:', error);
+            console.error('Error updating user image:', error); 
             this.message = 'Error updating user image';
             this.resetMessage();
           }
