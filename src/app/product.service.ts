@@ -106,4 +106,40 @@ updatePurchase(id: number, product: any): Observable<any> {
 deletePurchase(id: number): Observable<any> {
   return this.http.delete(`${this.apiUrl}/purchase/${id}`, { headers: this.getHeaders(), responseType: 'text' });
 }
+
+
+// AI related implementation
+
+getSalesForecast(productId: number): Observable<any> {
+  const headers = this.getHeaders();
+  
+  // Calculate the start and end date based on the current date
+  const { startDate, endDate } = this.getWeekStartAndEndDate();
+
+  const params = new HttpParams()
+    .set('productId', productId.toString())
+    .set('startDate', startDate)
+    .set('endDate', endDate);
+
+  return this.http.get(`${this.apiUrl1}/api/forecast`, { headers, params });
+}
+
+private getWeekStartAndEndDate(): { startDate: string, endDate: string } {
+  const currentDate = new Date();
+  const currentDayOfWeek = currentDate.getDay();
+
+  // Calculate the previous Sunday (start of the week)
+  const sunday = new Date(currentDate);
+  sunday.setDate(currentDate.getDate() - currentDayOfWeek);
+
+  // Calculate the upcoming Saturday (end of the week)
+  const saturday = new Date(sunday);
+  saturday.setDate(sunday.getDate() + 6);
+
+  // Format dates as YYYY-MM-DD
+  const startDate = sunday.toISOString().split('T')[0];
+  const endDate = saturday.toISOString().split('T')[0];
+
+  return { startDate, endDate };
+}
 }

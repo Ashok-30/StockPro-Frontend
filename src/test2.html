@@ -1,51 +1,57 @@
 
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ProductService } from '../product.service';
 
-  
 
+@Component({
+  selector: 'app-product-forecast',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './product-forecast.component.html',
+  styleUrls: ['./product-forecast.component.css']
+})
+export class ProductForecastComponent implements OnInit {
+  products: any[] = [];
+  selectedProduct: any = null;
+  forecastData: any = null;
+Object: any;
 
-  
-  placeOrder() {
-    const saleRequests = this.basketItems.map(item => ({
-      productId: item.id,
-      quantity: item.quantity
-    }));
+  constructor(private productService: ProductService) {}
 
-    this.productService.sellProducts(saleRequests).pipe(
-      switchMap(response => {
-        console.log('Products sold successfully:', response);
-        this.message = response;
-        this.message = response;
-        const productIds = this.basketItems.map(item => item.id).join(',');
-        const orderData = {
-          customerName: this.customerName,
-          customerNumber: this.customerPhone,
-          productIds,
-          totalAmount: this.grossAmount
-        };
-        return this.productService.addOrder(orderData);
-      }),
-      catchError(error => {
-        console.error('Error in selling products:', error);
-        return of('Failed to sell products');
-      })
-    ).subscribe({
-      next: orderResponse => {
-        console.log('Order added successfully:', orderResponse);
-        this.resetBasket();
-        setTimeout(() => {
-          this.router.navigate(['/orders']);
-        }, 2000);
+  ngOnInit(): void {
+    this.fetchProducts();
+  }
+
+  fetchProducts(): void {
+    this.productService.getAllProducts(0, 100).subscribe({
+      next: (data: any) => {
+        this.products = data.content;  // Adjust based on actual API response structure
       },
-      error: error => {
-        console.error('Error placing order:', error);
+      error: (error) => {
+        console.error('Error fetching products:', error);
       }
     });
   }
-  private resetBasket() {
-    this.basketItems = [];  
-    this.updateGrossAmount();  
 
-    this.customerName = '';
-    this.customerPhone = '';
-}
+  selectProduct(event: Event): void {
+    const productId = (event.target as HTMLSelectElement).value;
+    this.selectedProduct = this.products.find(p => p.id === +productId);
+    this.getForecast();
+  }
+
+  getForecast(): void {
+    if (this.selectedProduct) {
+      this.productService.getSalesForecast(this.selectedProduct.id).subscribe({
+        next: (data) => {
+          this.forecastData = data;
+          console.log('Forecast Data:', this.forecastData);
+        },
+        error: (error) => {
+          console.error('Error fetching forecast:', error);
+        }
+      });
+    }
+  }
 }

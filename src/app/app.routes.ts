@@ -14,6 +14,8 @@ import { ProfileComponent } from './users/profile/profile.component';
 import { PurchaseComponent } from './purchases/purchase/purchase.component';
 import { AddPurchaseComponent } from './purchases/add-purchase/add-purchase.component';
 
+import { ForecastComponent } from './forecast/forecast.component';
+
 
 
 export const routes: Routes = [
@@ -32,5 +34,6 @@ export const routes: Routes = [
   { path: 'purchase', title: 'Purchase', component: PurchaseComponent, canActivate: [AuthGuard] },
   { path: 'add-purchase', title: 'Add Purchase', component: AddPurchaseComponent, canActivate: [AuthGuard] },
 
- 
+
+  { path: 'forecast', title: 'Product Forecast', component: ForecastComponent, canActivate: [AuthGuard] }
 ];
