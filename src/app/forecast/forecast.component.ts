@@ -9,6 +9,16 @@ import { CeilPipe } from '../ceil.pipe';
 import { ProductService } from '../product.service';
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
+const fixedColors = [
+  'rgba(255, 99, 132, 0.6)',  // Red
+  'rgba(54, 162, 235, 0.6)',  // Blue
+  'rgba(255, 205, 86, 0.6)',  // Yellow
+  'rgba(75, 192, 192, 0.6)',  // Teal
+  'rgba(153, 102, 255, 0.6)', // Purple
+  'rgba(255, 159, 64, 0.6)',  // Orange
+  'rgba(199, 199, 199, 0.6)'  // Grey
+];
+
 interface ForecastData {
   date: string;
   quantity: number;
@@ -108,22 +118,26 @@ export class ForecastComponent implements OnInit {
   updateChart(): void {
     const canvas = document.getElementById('myChart') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d');
-
+  
     if (ctx) {
       if (this.chart) {
         this.chart.destroy();
       }
-
+  
+      // Use fixed colors instead of random colors
+      const backgroundColors = this.forecastData.map((_, index) => fixedColors[index % fixedColors.length]);
+      const borderColors = backgroundColors.map(color => color.replace('0.6', '1'));
+  
       this.chart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: this.forecastData.map((item: ForecastData) => new Date(item.date).toLocaleDateString('en-US', { weekday: 'long' })), // Use ForecastData interface
+          labels: this.forecastData.map((item: ForecastData) => new Date(item.date).toLocaleDateString('en-US', { weekday: 'long' })),
           datasets: [{
             label: 'Forecasted Sales Quantity',
-            data: this.forecastData.map((item: ForecastData) => item.quantity), // Use ForecastData interface
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
+            data: this.forecastData.map((item: ForecastData) => item.quantity),
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
+            borderWidth: 2
           }]
         },
         options: {
@@ -138,6 +152,7 @@ export class ForecastComponent implements OnInit {
       console.error('Failed to get 2D context for canvas');
     }
   }
+  
   
 
   searchProducts(): void {

@@ -1,99 +1,63 @@
 <app-sidebar></app-sidebar>
-
 <div class="relative md:ml-64 bg-blueGray-100">
     <div class="relative bg-white-200 md:pt-32 pb-500 pt-12" style="padding-top: 0rem;">
         <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
             <div class="flex justify-between items-center px-4 py-2 text-black">
                 <div class="flex items-center">
-                    <h1 class="text-xl font-bold">Manage Products</h1>
+                    <h1 class="text-xl font-bold">Prediction for Next Week</h1>
                 </div>
             </div>
 
             <canvas id="myChart"></canvas>
 
+            <div class="flex justify-between items-center mb-4">
+                <span>Show {{ pageSize }} entries
+                    <select [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChange()"
+                        class="px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                </span>
+                <input type="text" [(ngModel)]="searchValue" (input)="searchProducts()"
+                    class="px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Search">
+            </div>
 
+            <table class="w-full">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="px-4 py-2 text-left">Name</th>
+                        <th class="px-4 py-2 text-left">Quantity</th>
+                        <th class="px-4 py-2 text-left">Price</th>
+                        <th class="px-4 py-2 text-left">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products">
+                        <td class="px-4 py-2">{{ product.name }}</td>
+                        <td class="px-4 py-2">{{ product.quantity }}</td>
+                        <td class="px-4 py-2">{{ product.price }}</td>
+                        <td class="px-4 py-2">
+                            <button
+                                class="edit-button bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md mr-2"
+                                (click)="selectProduct(product)"><i class="fas fa-chart-line"></i> Forecast</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-                <div class="flex justify-between items-center mb-4">
-
-                    <span>Show {{ pageSize }} entries
-                        <select [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChange()"
-                            class="px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                        </select>
-                    </span>
-                    <input type="text" [(ngModel)]="searchValue" (input)="searchProducts()"
-                        class="px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Search">
-
-                </div>
-
-
-
-                <table class="w-full">
-                    <thead>
-                        <tr class="bg-gray-100">
-                            <th class="px-4 py-2 text-left">Name</th>
-                         
-                            <th class="px-4 py-2 text-left">Quantity</th>
-                            <th class="px-4 py-2 text-left">Price</th>
-                            <th class="px-4 py-2 text-left">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let product of products">
-                            <td class="px-4 py-2">{{ product.name }}</td>
-
-                            <td class="px-4 py-2">{{ product.quantity }}</td>
-                            <td class="px-4 py-2">{{ product.price }}</td>
-                            <td class="px-4 py-2">
-                                <button
-                                    class="edit-button bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md mr-2"
-                                    (click)="selectProduct(product)"><i class="fas fa-chart-line"></i> Forecast</button>
-
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="flex justify-between items-center mt-4">
-                    <button class="bg-[#BCAAA4] hover:bg-blue-600 text-white px-2 py-1 rounded-md"
-                        (click)="previousPage()"><i class="fas fa-arrow-left"></i> Previous</button>
-                    <span>Page {{ currentPage }} of {{ totalProducts / pageSize | ceil }}</span>
-                    <button class="bg-[#BCAAA4] hover:bg-blue-600 text-white px-2 py-1 rounded-md"
-                        (click)="nextPage()">Next <i class="fas fa-arrow-right"></i></button>
-                </div>
+            <div class="flex justify-between items-center mt-4 w-full">
+                <button class="bg-[#BCAAA4] hover:bg-blue-600 text-white px-2 py-1 rounded-md" (click)="previousPage()"><i class="fas fa-arrow-left"></i> Previous</button>
+                <span>Page {{ currentPage }} of {{ totalProducts / pageSize | ceil }}</span>
+                <button class="bg-[#BCAAA4] hover:bg-blue-600 text-white px-2 py-1 rounded-md" (click)="nextPage()">Next <i class="fas fa-arrow-right"></i></button>
             </div>
 
         </div>
     </div>
-    <!-- <div *ngIf="forecastData">
-        <h3>Sales Forecast</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Forecasted Quantity</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let date of forecastData | keyvalue">
-                    <td>{{ date.key }}</td>
-                    <td>{{ date.value }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div> -->
-   
-      
+</div>
 
-      
-    
-
-    <div class="text-xs text-gray-500 mt-4 text-center">
-        Copyright © 2024-2024. All rights reserved. Version 1.0.0
-    </div>
-   
-
+<div class="text-xs text-gray-500 mt-4 text-center">
+    Copyright © 2024-2024. All rights reserved. Version 1.0.0
+</div>
